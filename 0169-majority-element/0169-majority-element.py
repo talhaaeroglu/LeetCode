@@ -1,9 +1,14 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        numMap = {}
-        for num in nums:
-            if num not in numMap:
-                numMap[num] = 1
+        candidate = nums[0]
+        count = 1
+        
+        for i in range(1, len(nums)):
+            if count == 0:
+                candidate = nums[i]
+            if candidate == nums[i]:
+                count += 1
             else:
-                numMap[num] = numMap[num] + 1
-        return max(numMap, key= numMap.get)
+                count -= 1
+                
+        return candidate
