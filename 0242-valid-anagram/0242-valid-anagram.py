@@ -3,14 +3,8 @@ class Solution:
         mapS = {}
         mapT = {}
         for ch in s:
-            if ch not in mapS.keys():
-                mapS[ch] = 1
-            else:
-                mapS[ch] += 1
+            mapS[ch] = mapS.get(ch, 0) + 1
         for ch in t:
-            if ch not in mapT.keys():
-                mapT[ch] = 1
-            else:
-                mapT[ch] += 1
+            mapT[ch] = mapT.get(ch, 0) + 1
 
         return mapS == mapT
