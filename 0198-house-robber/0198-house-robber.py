@@ -1,14 +1,15 @@
 class Solution:
-    memo = []
-    def rob(self, nums: List[int]) -> int:
-        self.memo = [-1] * len(nums)
-        return self.helper(nums, len(nums)-1)
 
-    def helper(self, nums: List[int], index: int) -> int:
-        if index < 0:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
             return 0
-        if self.memo[index] >= 0:
-            return self.memo[index]
-        result = max(nums[index] + self.helper(nums, index - 2), self.helper(nums, index-1))
-        self.memo[index] = result
-        return result
+        if len(nums) == 1:
+            return nums[0]
+        
+        memo = [0] * len(nums)
+        memo[0], memo[1] = nums[0], max(nums[0], nums[1])
+        
+        for i in range(2, len(nums)):
+            memo[i] = max(nums[i] + memo[i-2], memo[i-1])
+        
+        return memo[-1]
