@@ -5,11 +5,11 @@ class Solution:
             return 0
         if len(nums) == 1:
             return nums[0]
+        prev, curr = 0, 0
+   
+        for i in range(len(nums)): 
+            temp = curr
+            curr = max(nums[i] + prev, curr)
+            prev = temp
         
-        memo = [0] * len(nums)
-        memo[0], memo[1] = nums[0], max(nums[0], nums[1])
-        
-        for i in range(2, len(nums)):
-            memo[i] = max(nums[i] + memo[i-2], memo[i-1])
-        
-        return memo[-1]
+        return curr
